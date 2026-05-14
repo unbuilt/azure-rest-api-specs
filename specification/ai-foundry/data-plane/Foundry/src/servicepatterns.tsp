@@ -41,6 +41,7 @@ union AgentDefinitionOptInKeys {
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 
+  @removed(Versions.v1)
   code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
@@ -52,7 +53,11 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   toolboxes_v1_preview: "Toolboxes=V1Preview",
   skills_v1_preview: "Skills=V1Preview",
+
+  @removed(Versions.v1)
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
+
+  @removed(Versions.v1)
   models_v1_preview: "Models=V1Preview",
 }
 

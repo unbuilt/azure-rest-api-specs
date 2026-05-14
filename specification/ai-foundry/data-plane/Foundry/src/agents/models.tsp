@@ -507,6 +507,7 @@ model HostedAgentDefinition extends AgentDefinition {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @removed(Versions.v1)
   code_configuration?: CodeConfiguration;
 
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")

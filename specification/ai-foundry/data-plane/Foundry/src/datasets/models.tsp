@@ -3,6 +3,8 @@ import "../common/service.tsp";
 
 namespace Azure.AI.Projects;
 
+using TypeSpec.Versioning;
+
 @doc("Enum to determine the type of data.")
 union DatasetType {
   string,
@@ -58,10 +60,11 @@ union PendingUploadType {
   @doc("No pending upload.")
   none: "None",
 
-  @doc("Deprecated: the service never read this value and silently ignored it. Use TemporaryBlobReference instead.")
+  @doc("Blob Reference is the only supported type.")
   BlobReference: "BlobReference",
 
   @doc("Temporary blob reference.")
+  @removed(Versions.v1)
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
