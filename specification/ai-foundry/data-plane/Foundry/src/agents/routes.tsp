@@ -44,6 +44,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @removed(Versions.v1)
   @post
   @route("/agents")
   @sharedRoute
@@ -95,6 +96,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
+  @removed(Versions.v1)
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
@@ -304,6 +306,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @removed(Versions.v1)
   @post
   @route("/agents/{agent_name}/versions")
   @sharedRoute
@@ -340,6 +343,7 @@ interface Agents {
    * Returns the previously-uploaded zip (`application/zip`).
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
    */
+  @removed(Versions.v1)
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/code:download")
   @extension(
@@ -363,6 +367,7 @@ interface Agents {
    * Returns the previously-uploaded zip (`application/zip`).
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
    */
+  @removed(Versions.v1)
   @get
   @route("/agents/{agent_name}/code:download")
   @extension(
