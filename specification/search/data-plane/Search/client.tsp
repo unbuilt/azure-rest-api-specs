@@ -1743,6 +1743,10 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(
+  Search.SharePointConnectorAppRegistration,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SearchField, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.SearchField,
@@ -3330,6 +3334,10 @@ namespace KnowledgeBaseRetrievalClient {
   Search.ContentUnderstandingSkillChunkingUnit,
   "com.azure.search.documents.indexes",
   "java"
+);
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingMethod,
+  "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(
   Search.ContentUnderstandingSkillExtractionOptions,
