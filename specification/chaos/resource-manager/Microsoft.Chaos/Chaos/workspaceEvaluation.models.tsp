@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -63,28 +64,67 @@ model WorkspaceEvaluationProperties {
   workspaceId: string;
 
   /**
+   * The resource snapshot ID used for this evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
+
+  /**
    * The number of scenarios to evaluate.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosToEvaluate?: int32;
 
   /**
    * The number of scenarios that evaluated successfully.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedSucceeded?: int32;
 
   /**
    * The number of scenarios that failed evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedFailed?: int32;
 
   /**
    * The number of scenarios that were cancelled during evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedCancelled?: int32;
+
+  /**
+   * The number of templates to evaluate.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesToEvaluate?: int32;
+
+  /**
+   * The number of templates that evaluated successfully.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedSucceeded?: int32;
+
+  /**
+   * The number of templates that failed evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedFailed?: int32;
+
+  /**
+   * The number of templates that were cancelled during evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedCancelled?: int32;
 
   /**
    * The overall evaluation result.
@@ -95,9 +135,14 @@ model WorkspaceEvaluationProperties {
   /**
    * Per-scenario evaluation results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "TypeSpec @identifiers is not version-aware; V05 emits items of type ScenarioEvaluationResultItem (which has scenarioName), V08 emits items of type TemplateEvaluationResultItem (which uses templateId). Preserving @identifiers(#[\"scenarioName\"]) keeps V05's SDK-generation hint stable. V08's hint is harmless (only affects SDK dedup, not wire format)."
+  @typeChangedFrom(
+    Microsoft.Chaos.Versions.v2026_08_01_preview,
+    ScenarioEvaluationResultItem[]
+  )
   @visibility(Lifecycle.Read)
   @identifiers(#["scenarioName"])
-  results?: ScenarioEvaluationResultItem[];
+  results?: TemplateEvaluationResultItem[];
 }
 
 /**
@@ -111,6 +156,27 @@ model ScenarioEvaluationResultItem {
 
   /**
    * The evaluation result for this scenario.
+   */
+  evaluationResult: RecommendationStatus;
+}
+
+/**
+ * Model that represents a single template evaluation result.
+ */
+@added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+model TemplateEvaluationResultItem {
+  /**
+   * The template ID that was evaluated.
+   */
+  templateId: string;
+
+  /**
+   * The template name that was evaluated.
+   */
+  templateName: string;
+
+  /**
+   * The evaluation result for this template.
    */
   evaluationResult: RecommendationStatus;
 }
